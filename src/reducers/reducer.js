@@ -24,10 +24,12 @@ function infiniteScrollReducer(state, action) {
         return { ...state, status: finishedStatus };
       }
       if (action.type === fetchSuccess) {
+        let endNumber = state.startNumber + 5;
+        localStorage.setItem('articlesFetched',  Number(endNumber));
         return {
           ...state,
           articlesIDS: [...state.articlesIDS, ...action.payload.articlesIDS],
-          startNumber: state.startNumber + 10,
+          startNumber: endNumber,
           status: idleStatus
         };
       }
