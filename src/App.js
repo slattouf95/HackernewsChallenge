@@ -4,7 +4,14 @@ import {idleStatus, infiniteScrollReducer} from './reducers/reducer';
 import NavBar from './NavBar';
 import notificationContext from './notificationContext';
 
-const initialState = { articlesIDS: [], status: idleStatus, startNumber: 1 };
+let pastFeedArticles = Number(localStorage.getItem('articlesFetched'));
+
+if (localStorage.getItem("articlesFetched") === null) {
+  pastFeedArticles = 0;
+};
+
+const initialState = { articlesIDS: [], status: idleStatus, startNumber: pastFeedArticles };
+
 
 function App() {
   const [state, dispatch] = useReducer(infiniteScrollReducer, initialState);
